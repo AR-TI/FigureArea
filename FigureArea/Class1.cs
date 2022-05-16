@@ -51,16 +51,12 @@ namespace FigureArea
 
         public Triangle(float a, float b, float c)
         {
-            if (IsPositive(a, b, c))
+            if (IsPositive(a, b, c) && IsExist(a, b, c))
             {
                 SideA = a;
                 SideB = b;
                 SideC = c;
                 SemiP = (a + b + c) / 2;
-            }
-            else
-            {
-                throw new ArgumentException("All sides must be positive!");
             }
         }
 
@@ -101,7 +97,17 @@ namespace FigureArea
                 return true;
             }
 
-            return false;
+            throw new ArgumentException("All sides must be positive!");;
+        }
+
+        private static bool IsExist(float a, float b, float c)
+        {
+            if (a + b > c && a + c > b && b + c > a)
+            {
+                return true;
+            }
+
+            throw new ArgumentException("Triangle does not exist!");
         }
     }
 }
